@@ -1,0 +1,12 @@
+beautifulsoup4==4.12.3
+Flask==3.0.2
+googlesearch-python==1.2.3        # (No newer version found)
+numpy==1.26.4
+pandas==2.2.2
+python-dateutil==2.9.0
+requests==2.31.0                  # (Still latest)
+scikit-learn==1.4.2
+python-whois==0.8.0              # (Still latest)
+gunicorn==21.2.0                 # (Still latest)
+urllib3==2.2.1
+
