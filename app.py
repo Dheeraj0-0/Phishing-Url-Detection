@@ -16,13 +16,15 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # Load the model
+# ✅ Safer model loading with absolute path for Azure
 try:
-    with open("pickle/model.pkl", "rb") as file:
+    model_path = os.path.join(os.path.dirname(__file__), 'pickle', 'model.pkl')
+    with open(model_path, "rb") as file:
         gbc = pickle.load(file)
+    print(f"✅ Model loaded successfully from: {model_path}")
 except Exception as e:
-    print(f"Error loading model: {e}")
+    print(f"❌ Error loading model: {e}")
     gbc = None
-
 def get_feature_analysis(features):
     feature_names = [
         "Using IP Address", "Long URL", "Short URL", "Symbol @", "Redirecting",
@@ -197,9 +199,15 @@ def index():
                 flash("Model not loaded properly. Please contact administrator.", "error")
                 return render_template("index.html", xx=-1)
             
-            y_pred = gbc.predict(x)[0]
-            y_pro_phishing = gbc.predict_proba(x)[0,0]
-            y_pro_non_phishing = gbc.predict_proba(x)[0,1]
+            try:
+                y_pred = gbc.predict(x)[0]
+                y_pro_phishing = gbc.predict_proba(x)[0, 0]
+                y_pro_non_phishing = gbc.predict_proba(x)[0, 1]
+                print("✅ Prediction done:", y_pred)
+            except Exception as e:
+                print("❌ Prediction error:", e)
+                flash("Prediction failed. Please check server logs.", "error")
+                return render_template("index.html", xx=-1)
             
             # Calculate threat level (inverted logic)
             threat_level = y_pro_non_phishing * 100  # Now using non-phishing probability
