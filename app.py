@@ -18,12 +18,21 @@ app.secret_key = os.urandom(24)
 # Load the model
 # ✅ Safer model loading with absolute path for Azure
 try:
-    model_path = os.path.join(os.path.dirname(__file__), 'pickle', 'model.pkl')
-    with open(model_path, "rb") as file:
-        gbc = pickle.load(file)
-    print(f"✅ Model loaded successfully from: {model_path}")
+    # Resolve full absolute path to the model
+    model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pickle", "model.pkl")
+    print(f"🔍 Attempting to load model from: {model_path}")
+
+    # Confirm path exists
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file not found at path: {model_path}")
+
+    # Load model
+    with open(model_path, "rb") as f:
+        gbc = pickle.load(f)
+
+    print("✅ Model loaded successfully!")
 except Exception as e:
-    print(f"❌ Error loading model: {e}")
+    print(f"❌ Model load failed: {e}")
     gbc = None
 def get_feature_analysis(features):
     feature_names = [
