@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # Load the model
-
+#hello
 try:
     model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pickle', 'model.pkl')
     print(f"🔍 Loading model from: {model_path}")
