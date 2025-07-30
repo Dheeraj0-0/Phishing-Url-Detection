@@ -1,5 +1,3 @@
-Phishing URL Detection
-This project is a web-based application designed to detect phishing URLs in real-time. It utilizes a machine learning model to analyze URLs and classify them as either legitimate or malicious. The application is deployed on Azure App Service for scalability and accessibility.
 
 🚀 Features
 Real-Time URL Analysis: Instantly analyze URLs to determine if they are phishing attempts.
