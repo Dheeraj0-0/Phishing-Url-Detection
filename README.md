@@ -1,54 +1,82 @@
+# Phishing URL Detector 🛡️
 
-🚀 Features
-Real-Time URL Analysis: Instantly analyze URLs to determine if they are phishing attempts.
+A web-based application that uses a machine learning model to detect phishing websites. The application analyzes URLs based on 30 distinct features to determine their safety, providing users with a detailed breakdown of the analysis and a confidence score.
 
-Machine Learning Model: Powered by a Gradient Boosting Classifier trained for high accuracy in detecting suspicious URLs.
+![Screenshot of the Phishing URL Detector application]
 
-Cloud-Based Deployment: Hosted on Azure App Service, ensuring reliable and scalable performance.
+---
 
-User-Friendly Web Interface: Simple interface for users to input URLs and view the analysis results.
+## ✨ Features
 
-🛠️ Technologies Used
-Backend: Python
+-   **Machine Learning Based Detection**: Utilizes a Gradient Boosting Classifier model to predict the likelihood of a URL being a phishing attempt.
+-   **Detailed Feature Analysis**: Provides a comprehensive report on all 30 features used in the analysis, explaining why each contributes to the final score.
+-   **Interactive UI**: A modern, responsive user interface built with Bootstrap, featuring a threat meter, scan history, and a dark mode toggle.
+-   **Dockerized Deployment**: The entire application is containerized with Docker, ensuring a consistent and easy setup process.
+-   **Session-Based History**: Keeps a temporary history of your last 20 scans for quick reference.
 
-Machine Learning: scikit-learn
+---
 
-Web Server: Gunicorn
+## 🛠️ Tech Stack
 
-Cloud Platform: Microsoft Azure (Azure App Service)
+-   **Backend**: Python, Flask
+-   **Machine Learning**: Scikit-learn, Pandas, NumPy
+-   **Frontend**: HTML, CSS, JavaScript, Bootstrap
+-   **Containerization**: Docker
+-   **Deployment**: Gunicorn
 
-⚙️ Project Setup & Installation
-To run this project locally, you will need to have Python installed.
+---
 
-Clone the repository:
+## 🚀 Getting Started
 
-git clone https://github.com/Dheeraj0-0/Phishing-Url-Detection.git
-cd Phishing-Url-Detection
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
-Create a virtual environment:
+### Prerequisites
 
-python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+-   [Docker](https://www.docker.com/get-started) must be installed on your machine.
 
-Install the dependencies:
+### Installation & Setup
 
-pip install -r requirements.txt
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
+    cd YOUR_REPOSITORY_NAME
+    ```
 
-Run the application:
+2.  **Build the Docker image:**
+    This command builds the image and runs the `retrain.py` script inside the container to create a compatible `model.pkl` file.
+    ```bash
+    docker build -t phishing-detector .
+    ```
 
-gunicorn app:app
+3.  **Run the Docker container:**
+    This command starts the application and maps your local port 8000 to the container's port 5000.
+    ```bash
+    docker run -p 8000:5000 phishing-detector
+    ```
 
+4.  **Access the application:**
+    Open your web browser and navigate to `http://localhost:8000`.
 
-☁️ Azure Deployment
-This application is deployed on Azure App Service. The deployment process involves:
+---
 
-Pushing the code to this GitHub repository.
+## 🚢 Deployment
 
-Setting up an Azure App Service instance with a Python runtime.
+This application is designed to be deployed as a container.
 
-Configuring the startup command to use Gunicorn.
+1.  **Push the Image to a Registry**:
+    Push your built Docker image to a container registry like Docker Hub, GitHub Container Registry (GHCR), or Azure Container Registry.
+    ```bash
+    # Example for Docker Hub
+    docker tag phishing-detector YOUR_DOCKERHUB_USERNAME/phishing-detector:latest
+    docker push YOUR_DOCKERHUB_USERNAME/phishing-detector:latest
+    ```
 
-Connecting the GitHub repository to the Azure App Service for continuous deployment.
+2.  **Deploy to a Host**:
+    Deploy the container image to a cloud service like Azure Web Apps, Heroku, or AWS Elastic Beanstalk. Ensure you configure the following environment variable on the hosting service:
+    -   `WEBSITES_PORT = 5000`
 
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss any changes.
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the `LICENSE.md` file for details.

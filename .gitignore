@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# Docker
+.dockerignore
+
+# Data and Models (Important!)
+*.csv
+pickle/model.pkl
+
+# IDE and OS files
+.vscode/
+.idea/
+*.DS_Store
